@@ -1,0 +1,40 @@
+<h1>
+	Courses List
+</h1>
+<table border="1">
+	<tr>
+		<td>course name</td>
+		<td>course description</td>
+	</tr>
+	@foreach($courses as $course)
+	<tr>
+		<td>
+			{{ $course->name}}
+		</td>
+		<td>
+			{{ $course->description }}
+		</td>
+		<td>
+			<a href="{{ route('courses.edit', $course->id) }}">Update</a>
+		</td>
+		<td>
+			<form action="{{ route('courses.destroy', $course->id) }}" method="POST">
+				{{ csrf_field() }}
+				{{ method_field('DELETE') }}
+				<input type="submit" name="submit" value="delete">
+			</form>
+			
+		</td>
+	</tr>
+	@endforeach
+</table>
+<a href="{{ route('courses.create') }}"> Add new Course </a>
+
+
+
+
+
+
+
+
+

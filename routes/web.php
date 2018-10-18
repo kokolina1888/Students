@@ -18,3 +18,6 @@
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfilesController@index')->name('profile');
 Route::get('/homeworks', 'HomeworksController@index')->name('homeworks');
+// Route::get('/courses', 'CoursesController@index');
+
+Route::resource('courses', 'CoursesController');
