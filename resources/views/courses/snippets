@@ -1,0 +1,20 @@
+ // dd($request);
+
+        Course::create([
+            'name' => $request->name, 
+            'description' => $request->description,
+
+        ]);
+
+
+        return redirect()->back()
+                        ->with('message', 'Course created!');
+
+@if(Session::has('message'))
+	{{ Session::get('message') }}
+@endif
+
+
+ $course = Course::findOrFail($id);
+        $course->update(['name' => $request->name, 
+            'description' => $request->description,]);

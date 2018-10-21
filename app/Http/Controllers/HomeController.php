@@ -17,7 +17,7 @@ class HomeController extends Controller
     	// return $course->lectures;
 
     	$lecture = Lecture::find(3);
-    	return $lecture->course->description;
+    	// return $lecture->course->description;
     	// return view('home');
     }
 }

@@ -1,0 +1,4 @@
+@foreach ($lectures as $lecture)
+{{ $lecture->course->name }}
+
+@endforeach

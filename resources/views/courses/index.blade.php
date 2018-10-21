@@ -9,7 +9,7 @@
 	@foreach($courses as $course)
 	<tr>
 		<td>
-			{{ $course->name}}
+			<a href="{{ route('courses.show', $course->id) }}">{{ $course->name}}</a>
 		</td>
 		<td>
 			{{ $course->description }}

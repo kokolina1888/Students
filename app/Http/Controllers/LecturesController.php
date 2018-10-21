@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Lecture;
 use App\Course;
-use App\Http\Requests\StoreCourseRequest;
 
-class CoursesController extends Controller
+class LecturesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,11 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $lectures = Lecture::with('course')->get();
+        //$lectures = Lecture::all();
 
-        return view('courses.index', compact('courses'));
+       return  $lectures;
+        return view('lectures.index', compact('lectures'));
     }
 
     /**
@@ -27,7 +29,9 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        return view('courses.create');
+        $courses = Course::all();
+
+        return view('lectures.create', compact('courses'));
     }
 
     /**
@@ -36,24 +40,14 @@ class CoursesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCourseRequest $request)
-    {    
-        //dd($request->name);  
-
-        // $this->validate($request, [
-        //     'name' => 'required|min:3', 
-        //     'description' => 'required|max:10'
-        // ], [
-        //     'description.max' => 'Не повече от 10 знака'
-        // ]);
-
-        Course::create([
+    public function store(Request $request)
+    {
+        Lecture::create([
             'name' => $request->name,
-            'description' => $request->description,
+            'number_of_hours' => $request->num_of_hours,
+            'course_id' => $request->course_id
         ]);
         
-        return redirect()->back()
-                ->with('message', 'Success create!');
     }
 
     /**
@@ -64,9 +58,7 @@ class CoursesController extends Controller
      */
     public function show($id)
     {
-        $course = Course::findOrFail($id);
-
-        return view('courses.show', compact('course'));
+        //
     }
 
     /**
@@ -77,9 +69,7 @@ class CoursesController extends Controller
      */
     public function edit($id)
     {
-        $course = Course::findOrFail($id);
-
-        return view('courses.edit', compact('course'));
+        //
     }
 
     /**
@@ -90,12 +80,8 @@ class CoursesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-       $course = Course::find($id); 
-       $course->update([
-        'name'=> $request->name,
-        'description' => $request->description,
-       ]);
+    {
+        //
     }
 
     /**
@@ -106,11 +92,6 @@ class CoursesController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
-
-        $course = Course::find($id);
-        // dd($course);
-        $course->delete();
-        
+        //
     }
 }

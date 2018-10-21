@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Course;
-use App\Http\Requests\StoreCourseRequest;
 
 class CoursesController extends Controller
 {
@@ -36,24 +35,18 @@ class CoursesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCourseRequest $request)
-    {    
-        //dd($request->name);  
-
-        // $this->validate($request, [
-        //     'name' => 'required|min:3', 
-        //     'description' => 'required|max:10'
-        // ], [
-        //     'description.max' => 'Не повече от 10 знака'
-        // ]);
-
-        Course::create([
-            'name' => $request->name,
-            'description' => $request->description,
+    public function store(Request $request)
+    {      
+        // dd($request);
+       $this->validate($request, [
+            'name'=> 'required|min:3',
+            'description' => 'required'
+        ], [
+            'name.required' => 'testing custom error messages',
         ]);
-        
+
         return redirect()->back()
-                ->with('message', 'Success create!');
+                ->with('message', 'Success store');
     }
 
     /**
@@ -64,9 +57,7 @@ class CoursesController extends Controller
      */
     public function show($id)
     {
-        $course = Course::findOrFail($id);
-
-        return view('courses.show', compact('course'));
+        //
     }
 
     /**
@@ -91,11 +82,7 @@ class CoursesController extends Controller
      */
     public function update(Request $request, $id)
     {   
-       $course = Course::find($id); 
-       $course->update([
-        'name'=> $request->name,
-        'description' => $request->description,
-       ]);
+       return 'Update course';
     }
 
     /**

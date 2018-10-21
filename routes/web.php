@@ -21,3 +21,4 @@ Route::get('/homeworks', 'HomeworksController@index')->name('homeworks');
 // Route::get('/courses', 'CoursesController@index');
 
 Route::resource('courses', 'CoursesController');
+Route::resource('lectures', 'LecturesController');
