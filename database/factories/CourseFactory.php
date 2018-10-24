@@ -1,11 +1,11 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Course;
 
-$factory->define(App\Course::class, function (Faker $faker) {
+$factory->define(Course::class, function (Faker $faker) {
     return [
-       'name' => $faker->sentence(5),
-       // 'description' => 'description',
-       'description' => $faker->paragraph(3),
+        'name' => $faker->sentence(),
+        'description' => $faker->text()
     ];
 });

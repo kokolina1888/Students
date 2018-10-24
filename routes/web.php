@@ -15,10 +15,19 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/profile', 'ProfilesController@index')->name('profile');
-Route::get('/homeworks', 'HomeworksController@index')->name('homeworks');
-// Route::get('/courses', 'CoursesController@index');
+// Route::get('/', 'HomeController@index')->name('home');
+// Route::resource('courses', 'CoursesController');
 
-Route::resource('courses', 'CoursesController');
-Route::resource('lectures', 'LecturesController');
+Route::group(['middleware' => 'auth'], function(){
+	Route::get('/profile', 'ProfilesController@index')->name('profile');
+	Route::get('/homeworks', 'HomeworksController@index')->name('homeworks');	
+	Route::resource('lectures', 'LecturesController');
+	Route::resource('courses', 'CoursesController')->except('courses.index');
+
+});
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
