@@ -17,14 +17,17 @@
 
 // Route::get('/', 'HomeController@index')->name('home');
 // Route::resource('courses', 'CoursesController');
+	// Route::resource('courses', 'CoursesController', 'only'=> 'index');
 
 Route::group(['middleware' => 'auth'], function(){
 	Route::get('/profile', 'ProfilesController@index')->name('profile');
 	Route::get('/homeworks', 'HomeworksController@index')->name('homeworks');	
 	Route::resource('lectures', 'LecturesController');
-	Route::resource('courses', 'CoursesController')->except('courses.index');
-
+	Route::resource('courses', 'CoursesController', ['except'=> 'index']);
 });
+
+	Route::resource('courses', 'CoursesController', ['only'=> 'index']);
+
 
 
 
