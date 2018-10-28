@@ -2,6 +2,10 @@
 
 @section('content')
 
-{{var_dump($course)}}
+<h1>
+	Edit user
+</h1>
+
+
 
 @endsection

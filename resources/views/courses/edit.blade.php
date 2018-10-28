@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h1>
 	Edit course
 </h1>
@@ -11,3 +15,5 @@
 	<textarea name="description">{{ $course->description }}</textarea>
 	<input type="submit" name="submit" value="save">
 </form>
+
+@endsection

@@ -20,17 +20,19 @@
 	// Route::resource('courses', 'CoursesController', 'only'=> 'index');
 
 Route::group(['middleware' => 'auth'], function(){
-	Route::get('/profile', 'ProfilesController@index')->name('profile');
+	
 	Route::get('/homeworks', 'HomeworksController@index')->name('homeworks');	
 	Route::resource('lectures', 'LecturesController');
 	Route::resource('courses', 'CoursesController', ['except'=> 'index']);
+	Route::resource('users', 'UsersController', ['only' => ['show', 'index']]);
+	Route::resource('users', 'UsersController', ['only' => ['store', 'create', 'edit', 'update', 'destroy']])->middleware('isAdmin');
+	Route::resource('profiles', 'ProfilesController', ['only' => ['edit', 'update', 'show']]);
 });
 
-	Route::resource('courses', 'CoursesController', ['only'=> 'index']);
-
-
+	// Route::resource('courses', 'CoursesController', ['only'=> 'index']);
+	Route::get('/', 'CoursesController@index');
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'CoursesController@index')->name('home');

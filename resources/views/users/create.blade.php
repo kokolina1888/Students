@@ -1,9 +1,13 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
 
+
 <h1>
-	Profile page
+	Add new user
 </h1>
+
+
+
 
 @endsection

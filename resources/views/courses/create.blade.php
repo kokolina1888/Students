@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('content')
+
+
 <h1>
 	Add new course
 </h1>
@@ -24,3 +29,6 @@
 </p>	
 {!! Form::submit('Save course') !!}
 {!! Form::close() !!}
+
+
+@endsection

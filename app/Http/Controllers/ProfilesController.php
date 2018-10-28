@@ -3,25 +3,61 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Profile;
 
 class ProfilesController extends Controller
 {
-    public function index()
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-    	
-    	// $users = User::all();
-
-    	// return $users;
-
-    	// $user = User::find(1);
-
-    	// return $user->profile;
-
-    	$profile = \App\Profile::find(1);
-
-    	return $profile->user;
-    	
-    	// return view('profile');
+        //
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        // Profile::all();
+        //Profile::find($id);
+        // $profile = Profile::where('user_id', $id)->get();
+        //SELECT * FROM profiles WHERE user_id=$id LIMIT 1
+        $profile = Profile::where('user_id', $id)->first();
+       return view('profiles.edit', compact('profile'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        // dd( $request->file('image_path') );
+        $filename = $request->file('image_path')->getClientOriginalName();
+        // dd($filename);
+        $path = public_path().'/img';
+        $request->file('image_path')->move($path, $filename);
+
+        //write in db
+        $profile = Profile::find($id);
+
+        $profile->image_path = $filename;
+
+        $profile->save();
+
+        return redirect()->back();
+    }
+
 }

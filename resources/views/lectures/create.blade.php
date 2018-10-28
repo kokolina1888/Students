@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h1>
 	Add New Lecture
 </h1>
@@ -18,3 +22,6 @@
 	</select>
 	<input type="submit" name="submit" value="Add Lecture">	
 </form>
+
+
+@endsection
